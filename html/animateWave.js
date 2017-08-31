@@ -39,7 +39,7 @@ AnimateWave.prototype.start = function() {
 			self.drawWave(wave)
 		});
 
-	}, 30)
+	}, 50)
 }
 AnimateWave.prototype.stop = function() {
 	window.clearInterval(this.timer)

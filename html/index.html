@@ -1,4 +1,4 @@
-2<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -8,6 +8,8 @@
 		#test{
 			border: 1px solid green;
 			height: 500px;
+			font-size: 50px;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -28,27 +30,27 @@
 		const waveData = [
 			{
 				offset: 100,
-				fillStyle: 'rgba(255, 100, 0, 0.2)',
-				waveSize: 20,
-				cycle: 2,
+				fillStyle: 'rgba(255, 0, 255, 0.2)',
+				waveSize: 30,
+				cycle: 1.5,
 				speed: 2
 			},
 			{
 				offset: 300,
-				fillStyle: 'rgba(255, 100, 255, 0.3)',
+				fillStyle: 'rgba(255, 0, 255, 0.3)',
 				waveSize: 10,
-				cycle: 1,
+				cycle: 2,
 				speed: 3
 			},
 			{
 				offset: 450,
-				fillStyle: 'rgba(255, 100, 0, 0.5)',
-				waveSize: 10,
-				cycle: 2,
+				fillStyle: 'rgba(255, 0, 255, 0.5)',
+				waveSize: 15,
+				cycle: 2.5,
 				speed: 0.5
 			}
 		]
-		var ani = new AnimateWave('test', 100, waveData);
+		var ani = new AnimateWave('test', 50, waveData);
 		function start() {
 			ani.start()
 		}
