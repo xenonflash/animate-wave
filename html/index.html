@@ -18,9 +18,9 @@
 		let w = window.innerWidth;
 		let h = 600;
 		// 波纹中心 在y 轴位置
-		let centerY = 250;
+		let centerY = 300;
 		// 波纹带高度(宽度)
-		let waveWidth = 500
+		let waveWidth = 350
 		// cycle 为出现的波纹周期数
 		var timer = null;
 		el.width = w;
@@ -43,9 +43,9 @@
 					offset = 0;
 				}
 				ctx.clearRect(0, 0, w, h);
-				drawWave(offset, 'rgba(255,0,255,0.3)', 15, 1, 1)
-				drawWave(offset + 300, 'rgba(0,0,255,0.3)', 50, 1.5, 3)
-				drawWave(offset + 500, 'rgba(0,255,0,0.3)', 35, 2, 2)
+				drawWave(offset, 'rgba(255,255,0,0.2)', 15, 1, 1)
+				drawWave(offset + 300, 'rgba(255,255,100	,0.3)', 20, 1.5, 3)
+				drawWave(offset + 500, 'rgba(255,255,0,0.45)', 30, 2, 2)
 			}, 16.7)
 		}
 		// offset: x值起偏移量, 每个波纹不同, 就有差异了
@@ -55,14 +55,19 @@
 		// speed: 每个波纹的速度
 		function drawWave(offset, fillStyle, waveSize, cycle, speed) {
 			offset *= speed
-			ctx.beginPath()
+			ctx.beginPath();
+			// 画上面部分
 			ctx.moveTo(0, Math.sin(cycle * 2 * Math.PI / w * offset) * waveSize + 100);
 			for (let x = 0; x <= w + 20; x += 20) {
-				let yPosition = Math.sin(cycle * 2 * Math.PI / w * (x + offset)) * waveSize + centerY
+				let yPosition = Math.sin(cycle * 2 * Math.PI / w * (x + offset)) * waveSize + ( centerY + waveWidth / 2)
 				ctx.lineTo(x, yPosition)
 			}
-			ctx.lineTo(w, 0)
-			ctx.lineTo(0, 0)
+			// 画另一部分
+			for (let x = w; x >= -20; x -= 20) {
+				let yPosition = Math.cos(cycle * 2 * Math.PI / w * (x + offset)) * waveSize + ( centerY - waveWidth / 2)
+				ctx.lineTo(x, yPosition)
+			}
+
 			ctx.closePath();
 			ctx.fillStyle = fillStyle
 			ctx.fill();
