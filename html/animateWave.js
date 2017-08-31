@@ -18,22 +18,24 @@ function AnimateWave(id, padding, waveData) {
 	this.ctx = _canvas.getContext('2d')
 	this.waveWidth = _canvas.height - padding * 2;
 	this.centerY = _canvas.height / 2;
+	this.cacheOffset = 0;
+	this.offset = 0
 }
 
 
 
 AnimateWave.prototype.start = function() {
-	let offset = 0;
+	this.offset = this.cacheOffset;
 	let self = this
 	this.timer = setInterval(() => {
 		// offset 为每帧绘制x轴偏移, 每帧绘制同一点的sin(x)值不同 来产生波纹动起来的效果
-		offset++;
-		if (offset > this.w) {
-			offset = 0;
+		this.offset++;
+		if (this.offset > this.w) {
+			this.offset = 0;
 		}
 		this.ctx.clearRect(0, 0, this.w, this.h);
 		this.waveData.forEach(wave => {
-			wave = Object.assign({}, wave, {offset: offset + wave.offset})
+			wave = Object.assign({}, wave, {offset: this.offset + wave.offset})
 			self.drawWave(wave)
 		});
 
@@ -42,6 +44,7 @@ AnimateWave.prototype.start = function() {
 AnimateWave.prototype.stop = function() {
 	window.clearInterval(this.timer)
 	this.timer = null;
+	this.cacheOffset = this.offset
 }
 
 // offset: x值起偏移量, 每个波纹不同, 就有差异了

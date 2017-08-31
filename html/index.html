@@ -17,6 +17,7 @@
 	<div id="test" >test</div>
 
 	<button onclick = "start()">start</button>
+	<button onclick="stop()">stop</button>
 	<script src='./animateWave.js'></script>
 	<script>
 	// offset: x值起偏移量, 每个波纹不同, 就有差异了
@@ -48,7 +49,12 @@
 			}
 		]
 		var ani = new AnimateWave('test', 100, waveData);
-		ani.start()
+		function start() {
+			ani.start()
+		}
+		function stop() {
+			ani.stop()
+		}
 	</script>
 </body>
 </html>
