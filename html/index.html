@@ -1,77 +1,54 @@
-<!DOCTYPE html>
+2<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>browser-sync</title>
 	<link rel="stylesheet" href="../css/index.css">
 	<style>
-		#canvas{
+		#test{
 			border: 1px solid green;
+			height: 500px;
 		}
 	</style>
 </head>
 <body>
-	<canvas id='canvas'></canvas>
+
+	
+	<div id="test" >test</div>
+
 	<button onclick = "start()">start</button>
+	<script src='./animateWave.js'></script>
 	<script>
-		var el = document.getElementById('canvas')
-		let w = window.innerWidth;
-		let h = 600;
-		// 波纹中心 在y 轴位置
-		let centerY = 300;
-		// 波纹带高度(宽度)
-		let waveWidth = 350
-		// cycle 为出现的波纹周期数
-		var timer = null;
-		el.width = w;
-		el.height = h;
-		window.onresize = function() {
-			w = window.innerWidth;
-			el.width = w;
-		}
-
-
-		var ctx = el.getContext('2d');
-		ctx.fillRect(0, 0, 50, 50)
-
-		function start() {
-			var offset = 0
-			timer = setInterval(() => {
-				// offset 为每帧绘制x轴偏移, 每帧绘制同一点的sin(x)值不同 来产生波纹动起来的效果
-				offset++;
-				if (offset > w) {
-					offset = 0;
-				}
-				ctx.clearRect(0, 0, w, h);
-				drawWave(offset, 'rgba(255,255,0,0.2)', 15, 1, 1)
-				drawWave(offset + 300, 'rgba(255,255,100	,0.3)', 20, 1.5, 3)
-				drawWave(offset + 500, 'rgba(255,255,0,0.45)', 30, 2, 2)
-			}, 16.7)
-		}
-		// offset: x值起偏移量, 每个波纹不同, 就有差异了
-		// fillStyle: 填充样式
-		// waveSize: 波纹起伏程度
-		// cycle: 多少个波纹周期(2π)
-		// speed: 每个波纹的速度
-		function drawWave(offset, fillStyle, waveSize, cycle, speed) {
-			offset *= speed
-			ctx.beginPath();
-			// 画上面部分
-			ctx.moveTo(0, Math.sin(cycle * 2 * Math.PI / w * offset) * waveSize + 100);
-			for (let x = 0; x <= w + 20; x += 20) {
-				let yPosition = Math.sin(cycle * 2 * Math.PI / w * (x + offset)) * waveSize + ( centerY + waveWidth / 2)
-				ctx.lineTo(x, yPosition)
+	// offset: x值起偏移量, 每个波纹不同, 就有差异了
+	// fillStyle: 填充样式
+	// waveSize: 波纹起伏程度
+	// cycle: 多少个波纹周期(2π)
+	// speed: 每个波纹的速度
+		const waveData = [
+			{
+				offset: 100,
+				fillStyle: 'rgba(255, 100, 0, 0.2)',
+				waveSize: 20,
+				cycle: 2,
+				speed: 2
+			},
+			{
+				offset: 300,
+				fillStyle: 'rgba(255, 100, 255, 0.3)',
+				waveSize: 10,
+				cycle: 1,
+				speed: 3
+			},
+			{
+				offset: 450,
+				fillStyle: 'rgba(255, 100, 0, 0.5)',
+				waveSize: 10,
+				cycle: 2,
+				speed: 0.5
 			}
-			// 画另一部分
-			for (let x = w; x >= -20; x -= 20) {
-				let yPosition = Math.cos(cycle * 2 * Math.PI / w * (x + offset)) * waveSize + ( centerY - waveWidth / 2)
-				ctx.lineTo(x, yPosition)
-			}
-
-			ctx.closePath();
-			ctx.fillStyle = fillStyle
-			ctx.fill();
-		}
-</script>
+		]
+		var ani = new AnimateWave('test', 100, waveData);
+		ani.start()
+	</script>
 </body>
 </html>
