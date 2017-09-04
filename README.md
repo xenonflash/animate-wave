@@ -8,3 +8,5 @@ animated wave line/area drawing by canvas
 - run `npm install`
 - run `npm start`
 
+### existing problem
+- canvas area not response to parentNode size change, will fix in the future
