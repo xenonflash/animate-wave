@@ -11,16 +11,21 @@
 			font-size: 50px;
 			text-align: center;
 		}
+		#circle{
+			border: 1px solid red
+		}
 	</style>
 </head>
 <body>
 
 	
 	<div id="test" >test</div>
-
+	
 	<button onclick = "start()">start</button>
 	<button onclick="stop()">stop</button>
+	<canvas id="circle" width="800" height='600'></div>
 	<script src='./animateWave.js'></script>
+	<script src='./circle.js'></script>
 	<script>
 	// offset: x值起偏移量, 每个波纹不同, 就有差异了
 	// fillStyle: 填充样式
