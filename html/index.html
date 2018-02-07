@@ -5,7 +5,7 @@
 	<title>browser-sync</title>
 	<link rel="stylesheet" href="../css/index.css">
 	<style>
-		#test{
+		#test, #circle{
 			border: 1px solid green;
 			height: 500px;
 			font-size: 50px;
@@ -20,10 +20,10 @@
 
 	
 	<div id="test" >test</div>
-	
+	<div id="circle"></div>
 	<button onclick = "start()">start</button>
 	<button onclick="stop()">stop</button>
-	<canvas id="circle" width="800" height='600'></div>
+	<!-- <canvas id="circle" width="800" height='600'></div> -->
 	<script src='./animateWave.js'></script>
 	<script src='./circle.js'></script>
 	<script>
@@ -56,11 +56,14 @@
 			}
 		]
 		var ani = new AnimateWave('test', 50, waveData);
+		var circleAni = new CircleWave('circle')
 		function start() {
-			ani.start()
+			// ani.start()
+			circleAni.start()
 		}
 		function stop() {
-			ani.stop()
+			// ani.stop()
+			circleAni.stop()
 		}
 	</script>
 </body>
