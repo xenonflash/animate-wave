@@ -1,11 +1,17 @@
+//TODO: 
+参数:
+
+// randomColor:  false
+// speed: 2
+// ineterval: 50 条纹间隔
+
+
 var offset = 0
-const COUNT = 10
 ctx = document.getElementById('circle').getContext('2d')
 var timer = null
 const data = []
-function drawCircle({
-  x, y, size
-}) {
+
+function drawCircle({ x, y, size }) {
   ctx.beginPath()
   ctx.moveTo(0, 600)
   ctx.arc(x, y, size, Math.PI, 0)
@@ -14,8 +20,6 @@ function drawCircle({
 }
 
 timer = setInterval(function () {
-  // if (offset > 200) offset = 0
-  // offset++
   ctx.clearRect(0, 0, 800, 600)
   // 如果第一个透明度很小之后, 去掉第一个元素, push一个新元素
   data.forEach(item => {
@@ -25,12 +29,15 @@ timer = setInterval(function () {
     ctx.fillStyle = color
     drawCircle(item)
     item.opacity -= 0.0015
-    item.size += 2
+    item.size += 1
   })
   
+  // 根据透明度 pop 元素
   if (data.length > 0 && data[data.length - 1].opacity <= 0.005) {
     data.pop()
   }
+
+  // 根据 间隔 添加元素
   if (data.length < 1 || data[0].size > 400){
     data.unshift(
       {
@@ -38,7 +45,8 @@ timer = setInterval(function () {
         y: 1000,
         size: 350,
         opacity: 0.3,
-        color: [166, 0, 166]
+        color: [166, 0, 166],
+        // color: getRandomColor()
       }
     )
   }
